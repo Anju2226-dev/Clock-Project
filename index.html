@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Javscript clock</title>
+  </head>
+  <body onload="StartTime()">
+    <h2>Javscript clock with date</h2>
+    <div id="clock" style="font-size: 24px; font-weight: bold"></div>
+    <div id="date" style="font-size: 20px; margin-top: 10px"></div>
+    <script>
+      function StartTime() {
+        const today = new Date();
+        let hour = today.getHours();
+        let minute = today.getMinutes();
+        let sec = today.getSeconds();
+        let session = "AM";
+        if (hour >= 12) {
+          session = "PM";
+        }
+        if (hour > 12) {
+          hour -= 12;
+        } else if (hour === 0) {
+          hour = 12;
+        }
+        hour = checkTime(hour);
+        minute = checkTime(minute);
+        sec = checkTime(sec);
+        document.getElementById("clock").innerHTML =
+          hour + ":" + minute + ":" + sec +"  " +session;
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        let day = days[today.getDay()];
+        let date = today.getDate();
+        let month = months[today.getMonth()];
+        let year = today.getFullYear();
+        document.getElementById("date").innerHTML = `${day}, ${date} ${month} ${year}`;
+        setTimeout(StartTime,1000);
+       
+        function checkTime(i) {
+          return i < 10 ? "0" + i : i;
+        }
+      }
+    </script>
+  </body>
+</html>
